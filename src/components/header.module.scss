@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "PaperForYourAss";
+  font-weight: normal;
+  font-style: normal;
+  src: local("PaperForYourAss"),
+  url("../fonts/PaperForYourAss.woff") format("woff"),
+  url("../fonts/PaperForYourAss.woff2") format("woff2");
+}
+
+.header__title {
+  font-family: PaperForYourAss;
+}
