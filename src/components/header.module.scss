@@ -1,3 +1,6 @@
+@import "src/lib/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
 @font-face {
   font-family: "PaperForYourAss";
   font-weight: normal;
@@ -9,4 +12,13 @@
 
 .header__title {
   font-family: PaperForYourAss;
+  font-size: 2em;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 3em;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 4em;
+  }
 }
