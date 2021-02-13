@@ -1,0 +1,59 @@
+@import "~bootstrap/scss/mixins/_breakpoints";
+@import "../variables";
+
+.cardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cardsWrapper__card {
+  margin-bottom: 15px;
+  width: 49%;
+
+  @include media-breakpoint-up(lg) {
+    width: 32%;
+  }
+}
+
+.cardsWrapper__card__title {
+  font-size: 0.75em !important;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 1em !important;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 1.25em !important;
+  }
+}
+
+.cardsWrapper__card__text {
+  font-size: 0.65em !important;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 0.9em !important;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 1em !important;
+  }
+}
+
+.cardsSection__header {
+  margin-bottom: 20px;
+  font-size: 0.8em;
+
+  @include media-breakpoint-up(xs) {
+    font-size: 1em;
+  }
+  @include media-breakpoint-up(sm) {
+    font-size: 1.5em;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 1.8em;
+  }
+  @include media-breakpoint-up(lg) {
+    font-size: 2em;
+  }
+}

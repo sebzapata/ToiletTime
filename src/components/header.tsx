@@ -1,9 +1,9 @@
 import React from 'react';
 
-import styles from './header.module.scss';
+import './header.module.scss';
 
-const Header = () => (
-  <h1 className={styles.header__title}>&lt;TOILET TRACKER&gt;</h1>
+const Header: React.FunctionComponent = () => (
+  <h1 className="header__title">&lt;MY POO DATA FOR THE YEAR&gt;</h1>
 );
 
 export default Header;
