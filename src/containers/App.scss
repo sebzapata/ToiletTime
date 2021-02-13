@@ -1,3 +1,6 @@
+@import "~bootstrap/scss/mixins/_breakpoints";
+@import "../variables";
+
 #root {
   width: 100%;
   display: flex;
@@ -23,35 +26,14 @@
   width: 100%;
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
+
+  @include media-breakpoint-up(lg) {
+    width: 990px;
+  }
 }
 
 .page__content {
   width: 100%;
   flex: 1;
   margin-bottom: 2em;
-}
-
-/* Mobile Styles */
-@media only screen and (max-width: 425px) {
-  .header {
-    font-size: 2em;
-  }
-}
-
-/* Tablet Styles */
-@media only screen and (min-width: 426px) and (max-width: 989px) {
-  .header {
-    font-size: 3em;
-  }
-}
-
-/* Desktop Styles */
-@media only screen and (min-width: 990px) {
-  .header {
-    font-size: 4em;
-  }
-
-  .page {
-    width: 990px;
-  }
 }

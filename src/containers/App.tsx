@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.scss';
 import Header from '../components/header';
+import MainData from '../components/mainData';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
 
@@ -18,6 +20,7 @@ class App extends React.Component {
     return (
       <div className="page">
         <Header />
+        <MainData />
       </div>
     );
   }
