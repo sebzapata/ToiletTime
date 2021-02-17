@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.scss';
+import Calendars from '../components/calendars';
 import Header from '../components/header';
-import MainData from '../components/mainData';
+import Cards from '../components/cards';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
@@ -20,7 +21,8 @@ class App extends React.Component {
     return (
       <div className="page">
         <Header />
-        <MainData />
+        <Calendars />
+        <Cards />
       </div>
     );
   }

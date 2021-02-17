@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/card';
 
-import './mainData.module.scss';
+import './cards.module.scss';
 import {
   calculateAveragePerDay,
   calculateDayWithMostPoos,
@@ -18,7 +18,7 @@ import {
 } from '../helpers/calculations';
 import { TimeAndRanking, TimeAndRankingRaw } from '../helpers/interfaces';
 
-const MainData: React.FunctionComponent = () => {
+const Cards: React.FunctionComponent = () => {
   const [timings, setTimings] = useState<TimeAndRanking[]>([]);
 
   useEffect(() => {
@@ -82,4 +82,4 @@ const MainData: React.FunctionComponent = () => {
     )
 };
 
-export default MainData;
+export default Cards;
