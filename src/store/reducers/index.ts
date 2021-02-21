@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux'
-import userReducer from './usersReducer'
+import timingsReducer from './timingsReducer'
 
-export default combineReducers({
-  usersList: userReducer
-})
+const rootReducer = combineReducers({
+  timingsList: timingsReducer
+});
+
+export type RootState = ReturnType<typeof rootReducer>;
+
+export default rootReducer;
