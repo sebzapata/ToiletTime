@@ -17,6 +17,7 @@ import {
   calculateTotalNumber
 } from '../helpers/calculations';
 import { TimeAndRanking, TimeAndRankingRaw } from '../helpers/interfaces';
+import Users from './users';
 
 const MainData: React.FunctionComponent = () => {
   const [timings, setTimings] = useState<TimeAndRanking[]>([]);
@@ -59,6 +60,7 @@ const MainData: React.FunctionComponent = () => {
 
     return (
       <>
+        <Users />
         <h2 className="cardsSection__header">Fun facts about the past year's pooping</h2>
         <div className="cardsWrapper">
           {renderCard("How many?", calculateTotalNumber(timings))}
