@@ -1,7 +1,7 @@
-import Axios from 'axios';
-import { DateTime } from 'luxon';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Card from 'react-bootstrap/card';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import './cards.module.scss';
 import {
@@ -16,32 +16,21 @@ import {
   calculateMostPoosInTimePeriod,
   calculateTotalNumber
 } from '../helpers/calculations';
-import { TimeAndRanking, TimeAndRankingRaw } from '../helpers/interfaces';
+import getTimings from '../store/actions/timingsAction';
+import { RootState } from '../store/reducers';
+
+import './cards.module.scss';
 
 const Cards: React.FunctionComponent = () => {
-  const [timings, setTimings] = useState<TimeAndRanking[]>([]);
+  const dispatch = useDispatch();
+  const timings = useSelector((state: RootState) => state.timingsList);
 
   useEffect(() => {
-    const getTimings = async (): Promise<void> => {
-      const url = 'https://toilet-a075.restdb.io/rest/timings'
-      const timings = await Axios.get(url, {
-        headers: {
-          "x-api-key": "601f19033f9eb665a1689200"
-        }
-      });
+    dispatch(getTimings())
+  }, [dispatch]);
 
-      const data: TimeAndRankingRaw[] = timings.data;
-      const formattedData = data.map(x => ({
-        time: DateTime.fromFormat(x.DateTime, 'yyyy/LL/dd hh:mm'),
-        ranking: x.Ranking
-      }));
 
-      setTimings(formattedData)
-    };
-
-    getTimings().then();
-  }, []);
-
+  if (timings.loading) return <h2>Loading</h2>;
 
   const renderCard = (title: string, text?: string) => {
     return (
@@ -55,23 +44,25 @@ const Cards: React.FunctionComponent = () => {
   };
 
   const renderCardsSection = () => {
-    if (!timings.length) return null;
+    const data = timings.timings;
+
+    if (!data.length) return null;
 
     return (
       <>
         <h2 className="cardsSection__header">Fun facts about the past year's pooping</h2>
         <div className="cardsWrapper">
-          {renderCard("How many?", calculateTotalNumber(timings))}
-          {renderCard("Average per day?", calculateAveragePerDay(timings))}
-          {renderCard("Longest dry spell?", calculateLongestTimeBetweenPoos(timings))}
-          {renderCard("Best day for pooping?", calculateDayWithMostPoos(timings))}
-          {renderCard("Most in 24 hours?", calculateMostPoosInTimePeriod(timings, 1))}
-          {renderCard("Most in 7 days?", calculateMostPoosInTimePeriod(timings, 7))}
-          {renderCard("Main day for hard poos?", calculateMainDayForHardPoos(timings))}
-          {renderCard("Main day for soft poos?", calculateMainDayForSoftPoos(timings))}
-          {renderCard("Main day for multiple poos?", calculateMainDayForMultiplePoos(timings))}
-          {renderCard("Main day for no poos?", calculateMainDayForNoPoos(timings))}
-          {renderCard("Most consecutive poos?", calculateMostPooDaysInARow(timings))}
+          {renderCard("How many?", calculateTotalNumber(data))}
+          {renderCard("Average per day?", calculateAveragePerDay(data))}
+          {renderCard("Longest dry spell?", calculateLongestTimeBetweenPoos(data))}
+          {renderCard("Best day for pooping?", calculateDayWithMostPoos(data))}
+          {renderCard("Most in 24 hours?", calculateMostPoosInTimePeriod(data, 1))}
+          {renderCard("Most in 7 days?", calculateMostPoosInTimePeriod(data, 7))}
+          {renderCard("Main day for hard poos?", calculateMainDayForHardPoos(data))}
+          {renderCard("Main day for soft poos?", calculateMainDayForSoftPoos(data))}
+          {renderCard("Main day for multiple poos?", calculateMainDayForMultiplePoos(data))}
+          {renderCard("Main day for no poos?", calculateMainDayForNoPoos(data))}
+          {renderCard("Most consecutive poos?", calculateMostPooDaysInARow(data))}
         </div>
       </>
     )
