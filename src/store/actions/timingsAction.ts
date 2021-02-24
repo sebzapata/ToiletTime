@@ -21,7 +21,9 @@ const getTimings = (): ThunkAction<Promise<void>, RootState, undefined, Action> 
       ranking: x.Ranking
     }));
 
-    dispatch(getTimingsAction(formattedData))
+    const sortedData = formattedData.sort((x, y) => x.time > y.time ? 1 : y.time > x.time ? -1 : 0);
+
+    dispatch(getTimingsAction(sortedData))
   }
   catch(error){
     dispatch(timingsErrorAction(error))

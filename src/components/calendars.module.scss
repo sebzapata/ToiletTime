@@ -1,0 +1,87 @@
+@import "~bootstrap/scss/mixins/_breakpoints";
+@import "../variables";
+
+.onePoo {
+  background: #ffca00;
+}
+
+.twoPoo {
+  background: #fa8a00;
+}
+
+.threePoo {
+  background: #f04c00;
+}
+
+.fourPoo {
+  background: #ff0000;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: black;
+}
+
+.monthHeader {
+  text-align: center;
+  @include media-breakpoint-up(xs) {
+    font-size: 0.8em;
+  }
+  @include media-breakpoint-up(sm) {
+    font-size: 0.9em;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 1em;
+  }
+}
+
+.calendarsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.calendarWithMonth {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+  @include media-breakpoint-up(xs) {
+    width: 33%;
+  }
+  @include media-breakpoint-up(sm) {
+    width: 33%;
+  }
+  @include media-breakpoint-up(md) {
+    width: 25%;
+  }
+}
+
+.react-calendar {
+  width: 100%;
+  @include media-breakpoint-up(xs) {
+    font-size: 8px;
+  }
+  @include media-breakpoint-up(sm) {
+    font-size: 9px;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 10px;
+  }
+}
+
+.calendarColourKey {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  div {
+    display: flex;
+    margin-right: 10px;
+    align-items: center;
+
+    p {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+  }
+}

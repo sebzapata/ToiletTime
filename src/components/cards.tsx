@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/card';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import './cards.module.scss';
 import {
   calculateAveragePerDay,
   calculateDayWithMostPoos,
@@ -11,16 +12,16 @@ import {
   calculateMainDayForMultiplePoos,
   calculateMainDayForNoPoos,
   calculateMainDayForSoftPoos,
-  calculateMostPooDaysInARow,
+  calculateMostPooDaysInARow, calculateMostPoosIn24Hours,
   calculateMostPoosInTimePeriod,
   calculateTotalNumber
 } from '../helpers/calculations';
 import getTimings from '../store/actions/timingsAction';
 import { RootState } from '../store/reducers';
 
-import './mainData.module.scss';
+import './cards.module.scss';
 
-const MainData: React.FunctionComponent = () => {
+const Cards: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const timings = useSelector((state: RootState) => state.timingsList);
 
@@ -29,7 +30,7 @@ const MainData: React.FunctionComponent = () => {
   }, [dispatch]);
 
 
-  if (timings.loading) return <h2>Loading</h2>;
+  if (timings.loading) return <h2 className="loading">Retrieving poo data</h2>;
 
   const renderCard = (title: string, text?: string) => {
     return (
@@ -55,7 +56,7 @@ const MainData: React.FunctionComponent = () => {
           {renderCard("Average per day?", calculateAveragePerDay(data))}
           {renderCard("Longest dry spell?", calculateLongestTimeBetweenPoos(data))}
           {renderCard("Best day for pooping?", calculateDayWithMostPoos(data))}
-          {renderCard("Most in 24 hours?", calculateMostPoosInTimePeriod(data, 1))}
+          {renderCard("Most in 24 hours?", calculateMostPoosIn24Hours(data))}
           {renderCard("Most in 7 days?", calculateMostPoosInTimePeriod(data, 7))}
           {renderCard("Main day for hard poos?", calculateMainDayForHardPoos(data))}
           {renderCard("Main day for soft poos?", calculateMainDayForSoftPoos(data))}
@@ -72,4 +73,4 @@ const MainData: React.FunctionComponent = () => {
     )
 };
 
-export default MainData;
+export default Cards;
