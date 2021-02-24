@@ -4,8 +4,7 @@ import { TimeAndRanking } from './interfaces';
 export const calculateTotalNumber = (data: TimeAndRanking[]) => {
   const firstPoop = data.map(x => x.time)[0];
 
-
-  return `I have done ${data.length} poos since ${firstPoop.monthLong} the ${firstPoop.day}${numberSuffix(firstPoop.day)}`
+  return `I have done ${data.length} poos since ${firstPoop.monthLong} the ${firstPoop.day}${numberSuffix(firstPoop.day)} ${firstPoop.year}`
 };
 
 export const calculateAveragePerDay = (data: TimeAndRanking[]) => {
@@ -35,42 +34,80 @@ export const calculateLongestTimeBetweenPoos = (data: TimeAndRanking[]) => {
 };
 
 const findBusiestDay = (times: DateTime[]) => {
-  const mondayCount = times.filter(x => x.weekday === 1);
-  const tuesdayCount = times.filter(x => x.weekday === 2);
-  const wednesdayCount = times.filter(x => x.weekday === 3);
-  const thursdayCount = times.filter(x => x.weekday === 4);
-  const fridayCount = times.filter(x => x.weekday === 5);
-  const saturdayCount = times.filter(x => x.weekday === 6);
-  const sundayCount = times.filter(x => x.weekday === 7);
+  const mondayCount = [...new Set(times.filter(x => x.weekday === 1).map(y => y.toFormat('dd-LL-yyyy')))];
+  const tuesdayCount = [...new Set(times.filter(x => x.weekday === 2).map(y => y.toFormat('dd-LL-yyyy')))];
+  const wednesdayCount = [...new Set(times.filter(x => x.weekday === 3).map(y => y.toFormat('dd-LL-yyyy')))];
+  const thursdayCount = [...new Set(times.filter(x => x.weekday === 4).map(y => y.toFormat('dd-LL-yyyy')))];
+  const fridayCount = [...new Set(times.filter(x => x.weekday === 5).map(y => y.toFormat('dd-LL-yyyy')))];
+  const saturdayCount = [...new Set(times.filter(x => x.weekday === 6).map(y => y.toFormat('dd-LL-yyyy')))];
+  const sundayCount = [...new Set(times.filter(x => x.weekday === 7).map(y => y.toFormat('dd-LL-yyyy')))];
 
   const arrayOfDays = [mondayCount, tuesdayCount, wednesdayCount, thursdayCount, fridayCount, saturdayCount, sundayCount];
   arrayOfDays.sort((x, y) => x.length > y.length ? 1 : y.length > x.length ? - 1 : 0);
 
-  return arrayOfDays[arrayOfDays.length - 1][0].weekdayLong;
+  return {
+    weekdayLong: DateTime.fromFormat(arrayOfDays[arrayOfDays.length - 1][0], 'dd-LL-yyyy').weekdayLong,
+    count: arrayOfDays[arrayOfDays.length - 1].length,
+  };
 };
 
 export const calculateDayWithMostPoos = (data: TimeAndRanking[]) => {
   const times = data.map(x => x.time);
   const busiestDay = findBusiestDay(times);
+  const durationOfTimings = data[data.length - 1].time.diff(data[0].time, "weeks");
+  const percentage = (busiestDay.count/durationOfTimings.weeks*100).toFixed();
 
-  return `The day that I most frequently pooped on was ${busiestDay}`
+  return `The day that I most frequently pooped on was a ${busiestDay.weekdayLong}, 
+  with ${percentage}% having a poo`
+
+};
+
+export const calculateMostPoosIn24Hours = (data: TimeAndRanking[]) => {
+  const times = data.map(x => x.time);
+  let firstPoo: DateTime;
+  let lastPoo: DateTime;
+
+  let mostPoopsInTimePeriod = 0;
+  for (let x = 0; x < times.length; x++) {
+    const currentPooPlusTimePeriod = times[x].plus({days: 1});
+    const pooWhichIsAfterTimePeriodWindow = times.find(x => x > currentPooPlusTimePeriod);
+    const lastPooInTimePeriodWindowIndex = times.indexOf(pooWhichIsAfterTimePeriodWindow) - 1;
+    const numberOfPoosInTimePeriod = lastPooInTimePeriodWindowIndex + 1 - x;
+
+    if (numberOfPoosInTimePeriod > mostPoopsInTimePeriod) {
+      mostPoopsInTimePeriod = numberOfPoosInTimePeriod;
+      firstPoo = times[x];
+      lastPoo = times[lastPooInTimePeriodWindowIndex]
+    }
+  }
+
+  return `The most poops I've done in 24 hours is ${mostPoopsInTimePeriod}, 
+    from ${firstPoo.monthLong} ${firstPoo.day}${numberSuffix(firstPoo.day)} ${firstPoo.toFormat('hh:mm')} 
+    to ${lastPoo.monthLong} ${lastPoo.day}${numberSuffix(lastPoo.day)} ${lastPoo.toFormat('hh:mm')} ${lastPoo.year}`
 };
 
 export const calculateMostPoosInTimePeriod = (data: TimeAndRanking[], timePeriod: number) => {
   const times = data.map(x => x.time);
+  let firstPoo: DateTime;
+  let lastPoo: DateTime;
 
   let mostPoopsInTimePeriod = 0;
   for (let x = 0; x < times.length; x++) {
-    const currentPooPlus24Hours = times[x].plus({days: timePeriod});
-    const pooWhichIsAfter24HourWindow = times.find(x => x > currentPooPlus24Hours);
-    const lastPooIn24HourWindowIndex = times.indexOf(pooWhichIsAfter24HourWindow) - 1;
+    const currentPooPlusTimePeriod = times[x].plus({days: timePeriod}).startOf("day");
+    const pooWhichIsAfterTimePeriodWindow = times.find(x => x > currentPooPlusTimePeriod);
+    const lastPooInTimePeriodWindowIndex = times.indexOf(pooWhichIsAfterTimePeriodWindow) - 1;
+    const numberOfPoosInTimePeriod = lastPooInTimePeriodWindowIndex + 1 - x;
 
-    if (lastPooIn24HourWindowIndex - x > mostPoopsInTimePeriod) {
-      mostPoopsInTimePeriod = lastPooIn24HourWindowIndex - x;
+    if (numberOfPoosInTimePeriod > mostPoopsInTimePeriod) {
+      mostPoopsInTimePeriod = numberOfPoosInTimePeriod;
+      firstPoo = times[x];
+      lastPoo = times[lastPooInTimePeriodWindowIndex]
     }
   }
 
-  return timePeriod > 1 ? `The most poops I've done in ${timePeriod} days is ${mostPoopsInTimePeriod}` : `The most poops I've done in 24 hours is ${mostPoopsInTimePeriod}`
+  return `The most poops I've done in ${timePeriod} days is ${mostPoopsInTimePeriod}, 
+    from ${firstPoo.monthLong} ${firstPoo.day}${numberSuffix(firstPoo.day)} 
+    to ${lastPoo.monthLong} ${lastPoo.day}${numberSuffix(lastPoo.day)} ${lastPoo.year}`
 };
 
 export const calculateMainDayForHardPoos = (data: TimeAndRanking[]) => {
@@ -79,7 +116,7 @@ export const calculateMainDayForHardPoos = (data: TimeAndRanking[]) => {
 
   const busiestDay = findBusiestDay(times);
 
-  return `The day that I most frequently did a hard poop (2 or lower) on was ${busiestDay}`
+  return `The day that I most frequently did a hard poop (2 or lower) on was a ${busiestDay.weekdayLong}`
 };
 
 export const calculateMainDayForSoftPoos = (data: TimeAndRanking[]) => {
@@ -88,7 +125,7 @@ export const calculateMainDayForSoftPoos = (data: TimeAndRanking[]) => {
 
   const busiestDay = findBusiestDay(times);
 
-  return `The day that I most frequently did a soft poop (5 or higher) on was ${busiestDay}`
+  return `The day that I most frequently did a soft poop (5 or higher) on was a ${busiestDay.weekdayLong}`
 };
 
 
@@ -178,8 +215,8 @@ export const calculateMostPooDaysInARow = (data: TimeAndRanking[]) => {
   }
 
   const longestCount = Math.ceil(longestTrack.endDate.diff(longestTrack.startDate, "days").days);
-  const startDate = `${longestTrack.startDate.toFormat('LLLL d')}${numberSuffix(longestTrack.startDate.day)}`
-  const endDate = `${longestTrack.endDate.toFormat('LLLL d')}${numberSuffix(longestTrack.endDate.day)}`
+  const startDate = `${longestTrack.startDate.toFormat('LLLL d')}${numberSuffix(longestTrack.startDate.day)}`;
+  const endDate = `${longestTrack.endDate.toFormat('LLLL d')}${numberSuffix(longestTrack.endDate.day)} ${longestTrack.endDate.year}`;
 
   return `The most consecutive days with poos was ${longestCount} from ${startDate} to ${endDate}`
 };

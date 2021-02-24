@@ -12,7 +12,7 @@ import {
   calculateMainDayForMultiplePoos,
   calculateMainDayForNoPoos,
   calculateMainDayForSoftPoos,
-  calculateMostPooDaysInARow,
+  calculateMostPooDaysInARow, calculateMostPoosIn24Hours,
   calculateMostPoosInTimePeriod,
   calculateTotalNumber
 } from '../helpers/calculations';
@@ -30,7 +30,7 @@ const Cards: React.FunctionComponent = () => {
   }, [dispatch]);
 
 
-  if (timings.loading) return <h2>Loading</h2>;
+  if (timings.loading) return <h2 className="loading">Retrieving poo data</h2>;
 
   const renderCard = (title: string, text?: string) => {
     return (
@@ -56,7 +56,7 @@ const Cards: React.FunctionComponent = () => {
           {renderCard("Average per day?", calculateAveragePerDay(data))}
           {renderCard("Longest dry spell?", calculateLongestTimeBetweenPoos(data))}
           {renderCard("Best day for pooping?", calculateDayWithMostPoos(data))}
-          {renderCard("Most in 24 hours?", calculateMostPoosInTimePeriod(data, 1))}
+          {renderCard("Most in 24 hours?", calculateMostPoosIn24Hours(data))}
           {renderCard("Most in 7 days?", calculateMostPoosInTimePeriod(data, 7))}
           {renderCard("Main day for hard poos?", calculateMainDayForHardPoos(data))}
           {renderCard("Main day for soft poos?", calculateMainDayForSoftPoos(data))}

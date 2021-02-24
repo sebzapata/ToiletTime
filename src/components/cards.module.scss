@@ -57,3 +57,23 @@
     font-size: 2em;
   }
 }
+
+.loading {
+  font-size: 30px;
+}
+
+.loading::after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  animation: ellipsis steps(4, end) 1s infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 30px;
+    margin-right: -30px;
+  }
+}
