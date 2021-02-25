@@ -2,7 +2,6 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
-
 import 'swiper/swiper.scss';
 import './displaySection.module.scss'
 import Calendars from './calendars';
@@ -21,7 +20,6 @@ const DisplaySection: React.FunctionComponent = () => {
       <Swiper
         spaceBetween={50}
         slidesPerView={1}
-        // navigation
         pagination={{
           clickable: true,
           el: '.swiper-pagination',
@@ -32,8 +30,12 @@ const DisplaySection: React.FunctionComponent = () => {
         width={null}
         simulateTouch={false}
       >
-        <SwiperSlide><Calendars /></SwiperSlide>
-        <SwiperSlide><Cards /></SwiperSlide>
+        <SwiperSlide>
+          <Calendars />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Cards />
+        </SwiperSlide>
       </Swiper>
     </>
   );

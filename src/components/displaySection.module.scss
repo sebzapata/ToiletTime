@@ -1,3 +1,6 @@
+@import "~bootstrap/scss/mixins/_breakpoints";
+@import "../variables";
+
 .swiper-pagination {
   position: relative !important;
   display: flex;
@@ -14,11 +17,21 @@
   border-top-right-radius: 12px !important;
   text-align: center !important;
   line-height: 30px !important;
-  font-size: 1.5em !important;
+  font-size: 0.9em !important;
   color:#000 !important;
   opacity: 1 !important;
   background: rgba(0,0,0,0) !important;
   border-bottom: #dee2e6 2px solid;
+
+  @include media-breakpoint-up(xs) {
+    font-size: 1em !important;
+  }
+  @include media-breakpoint-up(sm) {
+    font-size: 1.2em !important;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 1.5em !important;
+  }
 
   &:focus {
     outline: none;
@@ -29,6 +42,7 @@
     border-bottom: #dee2e6 2px solid;
   }
 }
+
 .swiper-pagination-bullet-active {
   border: #dee2e6 2px solid;
   border-bottom: white;

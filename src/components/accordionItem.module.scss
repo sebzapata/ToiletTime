@@ -1,0 +1,71 @@
+@import "~bootstrap/scss/mixins/_breakpoints";
+@import "../variables";
+
+.accordion__section {
+  width: 100%;
+  //border-top: 1px solid #bfc1c3;
+}
+
+.accordion__section__panel {
+  //padding: 0.5em;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.accordion__section__panel--hidden {
+  display: none;
+}
+
+.accordion__section__header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+
+.accordion__section__header__title {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 0.6em;
+  font-weight: 500;
+
+  @include media-breakpoint-up(xs) {
+    font-size: 0.7em;
+  }
+  @include media-breakpoint-up(sm) {
+    font-size: 0.8em;
+  }
+  @include media-breakpoint-up(md) {
+    font-size: 1em;
+  }
+  @include media-breakpoint-up(lg) {
+    font-size: 1.2em;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.accordion__section__header__icon {
+  height: 0.6em;
+
+  @include media-breakpoint-up(xs) {
+    height: 0.7em;
+  }
+  @include media-breakpoint-up(sm) {
+    height: 0.8em;
+  }
+  @include media-breakpoint-up(md) {
+    height: 1em;
+  }
+  @include media-breakpoint-up(lg) {
+    height: 1.2em;
+  }
+}
