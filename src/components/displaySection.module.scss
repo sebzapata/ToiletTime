@@ -1,0 +1,27 @@
+.swiper-pagination {
+  position: relative !important;
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.swiper-pagination-bullet {
+  width: 50% !important;
+  height: 50px !important;
+  padding: 5px 10px !important;
+  border-radius: 0 !important;
+  text-align: center !important;
+  line-height: 30px !important;
+  font-size: 4empx !important;
+  color:#000 !important;
+  opacity: 1 !important;
+  background: rgba(0,0,0,0.2) !important;
+
+  &:focus {
+    outline: none;
+  }
+}
+.swiper-pagination-bullet-active {
+  color:#fff !important;
+  background: #007aff !important;
+}
