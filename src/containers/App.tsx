@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import Calendars from '../components/calendars';
+import DisplaySection from '../components/displaySection';
 import Header from '../components/header';
 import Cards from '../components/cards';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,8 +22,7 @@ class App extends React.Component {
     return (
       <div className="page">
         <Header />
-        <Calendars />
-        <Cards />
+        <DisplaySection />
       </div>
     );
   }
