@@ -3,6 +3,8 @@ import Card from 'react-bootstrap/card';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import bristolStoolChart from '../images/BristolStoolChart.jpg';
+
 import './cards.module.scss';
 import {
   calculateAveragePerDay,
@@ -20,6 +22,9 @@ import getTimings from '../store/actions/timingsAction';
 import { RootState } from '../store/reducers';
 
 import './cards.module.scss';
+import { Accordion } from './accordion';
+import { AccordionItem } from './accordionItem';
+import PooChart from './pooChart';
 
 const Cards: React.FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -51,18 +56,23 @@ const Cards: React.FunctionComponent = () => {
     return (
       <>
         <h2 className="cardsSection__header">Fun facts about the past year's pooping</h2>
+        <Accordion>
+          <AccordionItem title="Bristol Stool chart">
+            <PooChart />
+          </AccordionItem>
+        </Accordion>
         <div className="cardsWrapper">
           {renderCard("How many?", calculateTotalNumber(data))}
           {renderCard("Average per day?", calculateAveragePerDay(data))}
           {renderCard("Longest dry spell?", calculateLongestTimeBetweenPoos(data))}
+          {renderCard("Most consecutive poos?", calculateMostPooDaysInARow(data))}
           {renderCard("Best day for pooping?", calculateDayWithMostPoos(data))}
+          {renderCard("Main day for no poos?", calculateMainDayForNoPoos(data))}
           {renderCard("Most in 24 hours?", calculateMostPoosIn24Hours(data))}
           {renderCard("Most in 7 days?", calculateMostPoosInTimePeriod(data, 7))}
           {renderCard("Main day for hard poos?", calculateMainDayForHardPoos(data))}
           {renderCard("Main day for soft poos?", calculateMainDayForSoftPoos(data))}
           {renderCard("Main day for multiple poos?", calculateMainDayForMultiplePoos(data))}
-          {renderCard("Main day for no poos?", calculateMainDayForNoPoos(data))}
-          {renderCard("Most consecutive poos?", calculateMostPooDaysInARow(data))}
         </div>
       </>
     )

@@ -14,7 +14,7 @@ export const calculateAveragePerDay = (data: TimeAndRanking[]) => {
   const numberOfDays = Math.ceil(lastDate.diff(firstDate, ["days"]).days);
   const averageNumber = (data.length/numberOfDays).toFixed(2);
 
-  return `On average, I did ${averageNumber} poos a day`;
+  return `On average, I do ${averageNumber} poos a day`;
 };
 
 export const calculateLongestTimeBetweenPoos = (data: TimeAndRanking[]) => {
@@ -116,7 +116,7 @@ export const calculateMainDayForHardPoos = (data: TimeAndRanking[]) => {
 
   const busiestDay = findBusiestDay(times);
 
-  return `The day that I most frequently did a hard poop (2 or lower) on was a ${busiestDay.weekdayLong}`
+  return `The day that I most frequently did a hard poop (2 or lower on Bristol Stool chart) on was a ${busiestDay.weekdayLong}`
 };
 
 export const calculateMainDayForSoftPoos = (data: TimeAndRanking[]) => {
@@ -125,9 +125,8 @@ export const calculateMainDayForSoftPoos = (data: TimeAndRanking[]) => {
 
   const busiestDay = findBusiestDay(times);
 
-  return `The day that I most frequently did a soft poop (5 or higher) on was a ${busiestDay.weekdayLong}`
+  return `The day that I most frequently did a soft poop (5 or higher on Bristol Stool chart) on was a ${busiestDay.weekdayLong}`
 };
-
 
 export const calculateMainDayForMultiplePoos = (data: TimeAndRanking[]) => {
   const times = data.map(x => x.time);
@@ -218,7 +217,7 @@ export const calculateMostPooDaysInARow = (data: TimeAndRanking[]) => {
   const startDate = `${longestTrack.startDate.toFormat('LLLL d')}${numberSuffix(longestTrack.startDate.day)}`;
   const endDate = `${longestTrack.endDate.toFormat('LLLL d')}${numberSuffix(longestTrack.endDate.day)} ${longestTrack.endDate.year}`;
 
-  return `The most consecutive days with poos was ${longestCount} from ${startDate} to ${endDate}`
+  return `The most consecutive days with poos was ${longestCount}, from ${startDate} to ${endDate}`
 };
 
 const numberSuffix = (number: number) => {

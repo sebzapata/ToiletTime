@@ -1,0 +1,67 @@
+@import "~bootstrap/scss/mixins/_breakpoints";
+@import "../variables";
+
+.pooChartWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.imageWrapper {
+  display: flex;
+  width: 50%;
+}
+
+.pooChartWrapper__image {
+  width: 25%;
+  height: fit-content;
+}
+
+.imageWrapper__text {
+  display: flex;
+  flex-direction: column;
+
+  h4 {
+    font-size: 0.6em;
+  }
+
+  p {
+    font-size: 0.5em;
+  }
+
+  @include media-breakpoint-up(xs) {
+    h4 {
+      font-size: 0.7em;
+    }
+
+    p {
+      font-size: 0.6em;
+    }
+  }
+  @include media-breakpoint-up(sm) {
+    h4 {
+      font-size: 0.8em;
+    }
+
+    p {
+      font-size:  0.7em;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    h4 {
+      font-size: 1em;
+    }
+
+    p {
+      font-size: 0.8em;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    h4 {
+      font-size: 1.2em;
+    }
+
+    p {
+      font-size:  1em;
+    }
+  }
+}
