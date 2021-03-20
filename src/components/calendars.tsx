@@ -2,7 +2,8 @@ import { DateTime } from 'luxon';
 import React from 'react';
 import Calendar from 'react-calendar';
 
-import 'react-calendar/dist/Calendar.css';
+// import 'react-calendar/dist/Calendar.css';
+import './calendarsDefault.module.scss';
 import './calendars.module.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducers';
@@ -41,7 +42,7 @@ const Calendars: React.FunctionComponent = () => {
               case 3: return "threePoo";
               case 4: return "fourPoo";
 
-              default: return "";
+              default: return "noPoo";
             }
 
           }}

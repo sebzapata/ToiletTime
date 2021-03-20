@@ -1,12 +1,11 @@
 import React from 'react';
-import { render } from 'react-dom';
-import poo1 from '../images/pooBlobs1.jpg'
-import poo2 from '../images/pooBlobs2.jpg'
-import poo3 from '../images/pooBlobs3.jpg'
-import poo4 from '../images/pooBlobs4.jpg'
-import poo5 from '../images/pooBlobs5.jpg'
-import poo6 from '../images/pooBlobs6.jpg'
-import poo7 from '../images/pooBlobs7.jpg'
+import poo1 from '../images/Type 1.jpg'
+import poo2 from '../images/Type 2.jpg'
+import poo3 from '../images/Type 3.jpg'
+import poo4 from '../images/Type 4.jpg'
+import poo5 from '../images/Type 5.jpg'
+import poo6 from '../images/Type 6.jpg'
+import poo7 from '../images/Type 7.jpg'
 
 import './pooChart.module.scss'
 
