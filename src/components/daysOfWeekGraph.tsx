@@ -4,6 +4,7 @@ import  { Bar } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../store/reducers';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 const DaysOfWeekGraph: React.FunctionComponent = () => {
   const timings = useSelector((state: RootState) => state.timingsList).timings.map(x => x.time);
@@ -73,7 +74,7 @@ const DaysOfWeekGraph: React.FunctionComponent = () => {
     }
   };
 
-  return <Bar data={data} options={options} />
+  return <Bar  data={data} options={options} plugins={[ChartDataLabels]} />
 };
 
 export default DaysOfWeekGraph;

@@ -1,0 +1,79 @@
+@import "~bootstrap/scss/mixins/_breakpoints";
+@import "../variables";
+
+.listWrapper {
+  display: flex;
+  padding-left: 0;
+  flex-wrap: wrap;
+
+  li {
+    display: flex;
+    margin-right: 15px;
+    width: 43%;
+    margin-bottom: 15px;
+    font-size: 0.6em;
+
+    @include media-breakpoint-up(xs) {
+      font-size: 0.8em;
+      width: 41%;
+    }
+    @include media-breakpoint-up(sm) {
+      font-size: 1em;
+      width: 30%;
+    }
+    @include media-breakpoint-up(md) {
+      font-size: 1.2em;
+    }
+
+    div {
+      margin-right: 5px;
+      height: 26px;
+      width: 26px;
+    }
+
+    b {
+      font-weight: 600;
+    }
+  }
+
+}
+
+.type1{
+  div {
+    background-color: rgb(173, 106, 0);
+  }
+}
+.type2{
+  div {
+    background-color: rgb(156, 90, 6);
+  }
+}
+.type3{
+  div {
+    background-color: rgb(138, 75, 9);
+  }
+}
+.type4{
+  div {
+    background-color: rgb(120, 60, 11);
+  }
+}
+.type5{
+  div {
+    background-color: rgb(102, 47, 10);
+  }
+}
+.type6{
+  div {
+    background-color: rgb(83, 34, 7);
+  }
+}
+.type7{
+  div {
+    background-color: rgb(65, 23, 0);
+  }
+}
+
+.chartjs-render-monitor {
+  margin-bottom: 30px;
+}
