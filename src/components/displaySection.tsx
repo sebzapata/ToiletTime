@@ -16,7 +16,7 @@ import StoolRankingGraph from './stoolRankingGraph';
 
 const DisplaySection: React.FunctionComponent = () => {
   SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
-  const tabTitles = ["Calendars", "Fun facts", "Graph 1", "Graph 2", "Graph 3", "Graph 4"]
+  const tabTitles = ["Calendars", "Fun facts", "Graph 1", "Graph 2", "Graph 3", "Graph 4"];
 
   return (
     <>

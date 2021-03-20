@@ -3,8 +3,9 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-
 import { RootState } from '../store/reducers';
+
+import './stoolRankingGraph.module.scss';
 
 const StoolRankingGraph: React.FunctionComponent = () => {
   const rankings = useSelector((state: RootState) => state.timingsList).timings.map(x => x.ranking);
@@ -28,6 +29,7 @@ const StoolRankingGraph: React.FunctionComponent = () => {
   };
 
   const options: chartjs.ChartOptions = {
+
     tooltips: {
       displayColors: false,
     },
@@ -36,34 +38,35 @@ const StoolRankingGraph: React.FunctionComponent = () => {
       display: true
     },
     legend: {
-      // display: false,
+      display: false,
       labels: {
         usePointStyle: true,
       },
     },
-    plugins: {
-      datalabels: {
-        color: '#000',
-        anchor: 'end',
-        align: 'start',
-        offset: -20,
-        backgroundColor: 'white',
-        font: {
-          weight: 'bold',
-          size: 10,
-        },
-        formatter: (value) => {
-          const percentage = (value/rankings.length*100).toFixed(2);
-          return percentage + ' %';
-        }
-      }
-    }
   };
 
-  ChartDataLabels;
+  chartjs.plugins.unregister(ChartDataLabels)
 
+  const renderLegend = () => {
+    return (
+      <ul className="listWrapper">
+        <li className="type1"><div /><b>Type 1:&nbsp;</b>{`${(rank1.length/rankings.length*100).toFixed(2)}%`}</li>
+        <li className="type2"><div /><b>Type 2:&nbsp;</b>{`${(rank2.length/rankings.length*100).toFixed(2)}%`}</li>
+        <li className="type3"><div /><b>Type 3:&nbsp;</b>{`${(rank3.length/rankings.length*100).toFixed(2)}%`}</li>
+        <li className="type4"><div /><b>Type 4:&nbsp;</b>{`${(rank4.length/rankings.length*100).toFixed(2)}%`}</li>
+        <li className="type5"><div /><b>Type 5:&nbsp;</b>{`${(rank5.length/rankings.length*100).toFixed(2)}%`}</li>
+        <li className="type6"><div /><b>Type 6:&nbsp;</b>{`${(rank6.length/rankings.length*100).toFixed(2)}%`}</li>
+        <li className="type7"><div /><b>Type 7:&nbsp;</b>{`${(rank7.length/rankings.length*100).toFixed(2)}%`}</li>
+      </ul>
+    )
+  };
 
-  return <Pie data={data} options={options} />
+  return (
+    <div>
+      <Pie data={data} options={options} />
+      {renderLegend()}
+    </div>
+  )
 };
 
 export default StoolRankingGraph;

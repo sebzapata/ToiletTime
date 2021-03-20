@@ -59,7 +59,7 @@ const HardnessDistributionGraph: React.FunctionComponent = () => {
           formatter: formatter,
         }
       },
-    ]
+    ],
   };
 
   const options: chartjs.ChartOptions = {
@@ -103,11 +103,11 @@ const HardnessDistributionGraph: React.FunctionComponent = () => {
           size: 10,
         },
         backgroundColor: '#dcdcdc22',
-      }
+      },
     }
   };
 
-  return <Bar data={data} options={options} />
+  return <Bar data={data} options={options} plugins={[ChartDataLabels]} />
 };
 
 export default HardnessDistributionGraph;
