@@ -21,16 +21,24 @@ export const calculateLongestTimeBetweenPoos = (data: TimeAndRanking[]) => {
   const times = data.map(x => x.time);
   let maxDiff: Duration;
 
+  let longestTrack = { startDate: times[0], endDate: times[0] };
+
   for (let x = 1; x < times.length; x++) {
     if (!maxDiff) {
       maxDiff = times[x].diff(times[x - 1], ['days', 'hours', 'minutes']);
+
     }
     if (times[x].diff(times[x - 1]) > maxDiff) {
       maxDiff = times[x].diff(times[x - 1], ['days', 'hours', 'minutes']);
+      longestTrack.startDate = times[x-1];
+      longestTrack.endDate = times[x];
     }
   }
 
-  return `The longest time without pooping was ${maxDiff.days} days, ${maxDiff.hours} hours and ${maxDiff.minutes} minutes`
+  const startDate = `${longestTrack.startDate.toFormat('LLLL d')}${numberSuffix(longestTrack.startDate.day)} ${longestTrack.startDate.toFormat('HH:mm')}`;
+  const endDate = `${longestTrack.endDate.toFormat('LLLL d')}${numberSuffix(longestTrack.endDate.day)} ${longestTrack.endDate.toFormat('HH:mm')} ${longestTrack.endDate.year}`;
+
+  return `The longest time without pooping was ${maxDiff.days} days, ${maxDiff.hours} hours and ${maxDiff.minutes} minutes from ${startDate} to ${endDate}`
 };
 
 const findBusiestDay = (times: DateTime[]) => {
@@ -57,8 +65,8 @@ export const calculateDayWithMostPoos = (data: TimeAndRanking[]) => {
   const durationOfTimings = data[data.length - 1].time.diff(data[0].time, "weeks");
   const percentage = (busiestDay.count/durationOfTimings.weeks*100).toFixed();
 
-  return `The day that I most frequently pooped on was a ${busiestDay.weekdayLong}, 
-  with ${percentage}% having a poo`
+  return `The day that I most reliably pooped on was a ${busiestDay.weekdayLong}, 
+  with ${percentage}% having 1 poo or more`
 
 };
 
@@ -116,7 +124,7 @@ export const calculateMainDayForHardPoos = (data: TimeAndRanking[]) => {
 
   const busiestDay = findBusiestDay(times);
 
-  return `The day that I most frequently did a hard poop (2 or lower on Bristol Stool chart) on was a ${busiestDay.weekdayLong}`
+  return `The day that I would most reliably do a hard poop (2 or lower on Bristol Stool chart) on was a ${busiestDay.weekdayLong}`
 };
 
 export const calculateMainDayForSoftPoos = (data: TimeAndRanking[]) => {
@@ -125,7 +133,7 @@ export const calculateMainDayForSoftPoos = (data: TimeAndRanking[]) => {
 
   const busiestDay = findBusiestDay(times);
 
-  return `The day that I most frequently did a soft poop (5 or higher on Bristol Stool chart) on was a ${busiestDay.weekdayLong}`
+  return `The day that I would most reliably do a soft poop (5 or higher on Bristol Stool chart) on was a ${busiestDay.weekdayLong}`
 };
 
 export const calculateMainDayForMultiplePoos = (data: TimeAndRanking[]) => {
@@ -221,6 +229,8 @@ export const calculateMostPooDaysInARow = (data: TimeAndRanking[]) => {
 };
 
 const numberSuffix = (number: number) => {
+  if (number === 11 || number === 12 || number === 13) return 'th';
+
   switch (number % 10) {
     case 1: return "st";
     case 2:  return "nd";

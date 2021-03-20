@@ -11,26 +11,31 @@
 .swiper-pagination-bullet {
   width: 50% !important;
   height: 50px !important;
-  padding: 5px 10px !important;
+  padding: 2px 2px !important;
   border-radius: 0 !important;
   border-top-left-radius: 12px !important;
   border-top-right-radius: 12px !important;
   text-align: center !important;
-  line-height: 30px !important;
-  font-size: 0.9em !important;
+  line-height: 20px !important;
+  font-size: 0.7em !important;
   color:#000 !important;
   opacity: 1 !important;
   background: rgba(0,0,0,0) !important;
   border-bottom: #dee2e6 2px solid;
 
   @include media-breakpoint-up(xs) {
-    font-size: 1em !important;
+    font-size: 0.8em !important;
+    padding: 5px 5px !important;
   }
   @include media-breakpoint-up(sm) {
-    font-size: 1.2em !important;
+    font-size: 1em !important;
+    line-height: 30px !important;
+    padding: 5px 10px !important;
   }
   @include media-breakpoint-up(md) {
     font-size: 1.5em !important;
+    line-height: 30px !important;
+    padding: 5px 10px !important;
   }
 
   &:focus {

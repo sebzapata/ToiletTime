@@ -1,24 +1,33 @@
 @import "~bootstrap/scss/mixins/_breakpoints";
 @import "../variables";
 
+.noPoo {
+  cursor: default !important;
+}
 .onePoo {
   background: #ffca00;
 }
-
 .twoPoo {
   background: #fa8a00;
 }
-
 .threePoo {
   background: #f04c00;
 }
-
 .fourPoo {
   background: #ff0000;
 }
 
-.react-calendar__month-view__days__day--weekend {
-  color: black;
+.react-calendar__month-view__weekdays__weekday {
+  abbr {
+    cursor: default !important;
+    text-decoration: none !important;
+  }
+}
+
+.react-calendar__month-view__days__day {
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .monthHeader {
@@ -39,16 +48,18 @@
 .calendarsWrapper {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
 .calendarWithMonth {
   display: flex;
   flex-direction: column;
   align-content: center;
-  width: 50%;
+  width: 100%;
+  margin-bottom: 5px;
 
   @include media-breakpoint-up(xs) {
-    width: 33%;
+    width: 50%;
   }
   @include media-breakpoint-up(sm) {
     width: 33%;
@@ -82,6 +93,16 @@
     display: flex;
     margin-right: 10px;
     align-items: center;
+
+    svg {
+      width: 10px;
+      height: 10px;
+
+      @include media-breakpoint-up(xs) {
+        width: 20px;
+        height: 20px;
+      }
+    }
 
     p {
       font-size: 0.6em;
